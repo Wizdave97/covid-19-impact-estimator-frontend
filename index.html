@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple web app that estimates COVID-19 impact on a region">
+    <link rel="stylesheet" href="tailwind.css">
+    <title>COVID-19 | Impact Estimator</title>
+</head>
+<body class="w-full h-full bg-gray-100">
+   <header class="w-full flex flex-no-wrap items-center justify-center h-24 md:h-32 bg-gray-900 p-3 mb-4 shadow-xl">
+        <div class="w-px md:w-2 bg-blue-600 h-full md:h-2 mx-2"></div>
+        <h1 class="text-md font-semibold border-blue-600 border-2 p-2 text-gray-200 text-center md:text-3xl font-bold">
+            COVID-19 IMPACT ESTIMATOR
+        </h1>
+        <div class="w-px md:w-2 bg-blue-600 h-full md:h-2 mx-2"></div>
+   </header> 
+   <div class="w-full h-min-0 md:w-5/6 mx-auto p-8 shadow-2xl">
+        <div class="w-full p-2 mb-4">
+            <h1 class="text-blue-700 text-md md:text-xl font-semibold text-center">Please Fill the form to get an estimate</h1>
+        </div>
+       <form class="shadow-inner w-full flex flex-wrap justify-around md:w-4/6 mx-auto py-12 px-6 rounded-md" novalidate action="">
+            <label for="" class="text-gray-800 w-full md:w-5/12  text-lg font-semibold">
+                Population:
+                <input class="w-full p-4 my-2 
+                    border-gray-800 rounded-md 
+                    outline-none bg-gray-100 border-2 
+                    text-sm text-gray-600 
+                    appearance-none
+                    hover:outline-none 
+                    hover:shadow-inset 
+                    hover:border-gray-200 
+                    focus:border-gray-300" 
+                    required
+                    type="number" 
+                    min="0"
+                    name="population" 
+                    id="population"
+                    data-population="">
+            </label>
+            <label for="" class="w-full md:w-5/12 text-gray-800 text-lg font-semibold">
+                Time to Elapse:
+                <input class="w-full p-4 my-2 
+                    border-gray-800 rounded-md 
+                    outline-none bg-gray-100 border-2 
+                    text-sm text-gray-600 
+                    hover:outline-none 
+                    appearance-none
+                    hover:shadow-inset 
+                    hover:border-gray-200 
+                    focus:border-gray-300"
+                    required 
+                    type="number" 
+                    min="0"
+                    name="timeToElapse" 
+                    id="timeToElapse"
+                    data-to-elapse="">
+            </label>
+            <label for="" class="w-full md:w-5/12 text-gray-800 text-lg font-semibold">
+                Reported Cases:
+                <input class="w-full  p-4 my-2 
+                    border-gray-800 rounded-md 
+                    outline-none bg-gray-100 border-2 
+                    text-sm text-gray-600 
+                    appearance-none
+                    hover:outline-none 
+                    hover:shadow-inset 
+                    hover:border-gray-200 
+                    focus:border-gray-300" 
+                    required
+                    type="number" 
+                    min="0"
+                    name="reportedCases" 
+                    id="reportedCases"
+                    data-reported-cases="">
+            </label>
+            <label for="" class="w-full md:w-5/12 text-gray-800 text-lg font-semibold">
+                Total Hospital Beds:
+                <input class="w-full  p-4 my-2 
+                    border-gray-800 rounded-md 
+                    outline-none bg-gray-100 border-2 
+                    text-sm text-gray-600 
+                    appearance-none
+                    hover:outline-none 
+                    hover:shadow-inset 
+                    hover:border-gray-200 
+                    focus:border-gray-300"
+                    required 
+                    type="number" 
+                    min="0"
+                    name="totalHospitalBeds" 
+                    id="totalHospitalBeds"
+                    data-total-hospital-beds="">
+            </label>
+            <label for="" class="w-full md:w-5/12 text-gray-800 text-lg font-semibold">
+                Reported Cases:
+                <select class="w-full px-8 py-4 my-2 
+                    border-gray-800 rounded-md 
+                    outline-none bg-gray-100 border-2 
+                    text-sm text-gray-600 
+                    hover:outline-none 
+                    hover:shadow-inset 
+                    hover:border-gray-200 
+                    focus:border-gray-300" 
+                    required
+                    type="text" 
+                    name="periodType" 
+                    id="periodType"
+                    value=""
+                    data-period-type="">
+                        <option value="">select</option>
+                        <option value="days">days</option>
+                        <option value="weeks">weeks</option>
+                        <option value="months">months</option>
+                    </select>
+
+            </label>
+            <button class="w-full md:w-2/3 px-8 py-4 my-2 
+            border-green-800 rounded-md 
+            outline-none bg-green-500 border-2 
+            text-sm text-gray-800 
+            font-bold
+            hover:outline-none 
+            shadow-inset 
+            hover:bg-green-200 
+            focus:border-gray-300"  type="submit" data-go-estimate="">Submit</button>
+       </form>
+   </div>
+   <script>
+       const data={};
+       const errors={};
+       const form = document.querySelector('form');
+       const inputs = document.querySelectorAll('input');
+       const selects = document.querySelectorAll('select');
+       const formInputs = [...Array.from(inputs), ...Array.from(selects)];
+       const checkValidity = (el) => {
+        let validity=el.checkValidity();
+          if(validity) {
+              let errorId=el.name+"-error";
+              if(document.getElementById(errorId)) document.getElementById(errorId).remove(); 
+              delete errors[el.name]; 
+          }
+          else {
+              let errorId=el.name+"-error";
+              if(document.getElementById(errorId)) return
+              spanEl=`<span id="${el.name+'-error'}" class="w-full text-sm text-red-600">Please this field is required and must be a number</span>`;
+              if(el.type != "number") spanEl=`<span id="${el.name+'-error'}" class="w-full text-sm text-red-600">Please this field is required</span>`;
+              el.parentElement.insertAdjacentHTML('beforeend',spanEl);
+              errors[el.name] = true;
+          }
+       }
+       const handleBlurEvent = (event) => {
+          checkValidity(event.target);
+       }
+
+       const handleChange = (event) => {
+           if(event.target.type === "number") data[event.target.name] = +event.target.value;
+           else data[event.target.name] = event.target.value;
+           
+       };
+       formInputs.map(input=> {
+           errors[input.name] = true;
+           input.onchange = handleChange;
+           input.onblur = handleBlurEvent;
+       });
+       form.onsubmit=function(event){
+           event.preventDefault();
+           if(Object.keys(errors).length === 0 && Object.keys(data).length === formInputs.length){
+            alert("Submitting now");
+           }
+           else{
+            formInputs.map(input=> {
+                checkValidity(input);
+            })
+           }
+           
+       };
+       const postToBackend = (data) => {
+        fetch(``,{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(data)
+        })
+       }
+   </script>
+</body>
+</html>
