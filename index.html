@@ -93,7 +93,7 @@
                     data-total-hospital-beds="">
             </label>
             <label for="" class="w-full md:w-5/12 text-gray-800 text-lg font-semibold">
-                Reported Cases:
+                Period Type:
                 <select class="w-full px-8 py-4 my-2 
                     border-gray-800 rounded-md 
                     outline-none bg-gray-100 border-2 
@@ -128,7 +128,8 @@
        </form>
    </div>
    <script>
-       const data={};
+       window.addEventListener('DOMContentLoaded',()=>{
+        const data={};
        const errors={};
        const form = document.querySelector('form');
        const inputs = document.querySelectorAll('input');
@@ -183,8 +184,14 @@
                 "Content-Type":"application/json"
             },
             body:JSON.stringify(data)
+        }).then(res=>res.json()).then(res=> {
+
+        }).catch(err => {
+
         })
        }
+       })
+       
    </script>
 </body>
 </html>
