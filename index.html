@@ -20,6 +20,88 @@
             <h1 class="text-blue-700 text-md md:text-xl font-semibold text-center">Please Fill the form to get an estimate</h1>
         </div>
        <form class="shadow-inner w-full flex flex-wrap justify-around md:w-4/6 mx-auto py-12 px-6 rounded-md" novalidate action="">
+        <div class="w-full p-2 mt-2 mb-4 border-b-2 border-gray-600">
+            <h1 class="text-indigo-700 text-md md:text-xl font-semibold text-center">Region Data</h1>
+        </div>
+        <label for="" class="text-gray-800 w-full md:w-5/12  text-lg font-semibold">
+            Region Name:
+            <input class="w-full p-4 my-2 
+                border-gray-800 rounded-md 
+                outline-none bg-gray-100 border-2 
+                text-sm text-gray-600 
+                appearance-none
+                hover:outline-none 
+                hover:shadow-inset 
+                hover:border-gray-200 
+                focus:border-gray-300" 
+                required
+                placeholder="Africa"
+                type="text" 
+                min="0"
+                name="name" 
+                id="name"
+                data-region-name="">
+        </label>
+        <label for="" class="text-gray-800 w-full md:w-5/12  text-lg font-semibold">
+            Average Age:
+            <input class="w-full p-4 my-2 
+                border-gray-800 rounded-md 
+                outline-none bg-gray-100 border-2 
+                text-sm text-gray-600 
+                appearance-none
+                hover:outline-none 
+                hover:shadow-inset 
+                hover:border-gray-200 
+                focus:border-gray-300" 
+                required
+                placeholder="18.5"
+                type="number" 
+                min="0"
+                name="avgAge" 
+                id="avgAge"
+                data-average-age="">
+        </label>
+        <label for="" class="text-gray-800 w-full md:w-5/12  text-lg font-semibold">
+            Average Daily Income:
+            <input class="w-full p-4 my-2 
+                border-gray-800 rounded-md 
+                outline-none bg-gray-100 border-2 
+                text-sm text-gray-600 
+                appearance-none
+                hover:outline-none 
+                hover:shadow-inset 
+                hover:border-gray-200 
+                focus:border-gray-300" 
+                required
+                placeholder="2"
+                type="number" 
+                min="0"
+                name="avgDailyIncomeInUSD" 
+                id="avgDailyIncomeInUSD"
+                data-average-daily-income-in-usd="">
+        </label>
+        <label for="" class="text-gray-800 w-full md:w-5/12  text-lg font-semibold">
+            Average Daily Population Income:
+            <input class="w-full p-4 my-2 
+                border-gray-800 rounded-md 
+                outline-none bg-gray-100 border-2 
+                text-sm text-gray-600 
+                appearance-none
+                hover:outline-none 
+                hover:shadow-inset 
+                hover:border-gray-200 
+                focus:border-gray-300" 
+                required
+                placeholder="0.65"
+                type="number" 
+                min="0"
+                name="avgDailyPopulationIncome" 
+                id="avgDailyPopulationIncome"
+                data-average-daily-population-income="">
+        </label>
+        <div class="w-full p-2 mt-2 mb-4 p-2 border-b-2 border-gray-600">
+            <h1 class="text-indigo-700 text-md md:text-xl font-semibold text-center">Infection Data</h1>
+        </div>
             <label for="" class="text-gray-800 w-full md:w-5/12  text-lg font-semibold">
                 Population:
                 <input class="w-full p-4 my-2 
@@ -32,6 +114,7 @@
                     hover:border-gray-200 
                     focus:border-gray-300" 
                     required
+                    placeholder="2000"
                     type="number" 
                     min="0"
                     name="population" 
@@ -50,6 +133,7 @@
                     hover:border-gray-200 
                     focus:border-gray-300"
                     required 
+                    placeholder="30"
                     type="number" 
                     min="0"
                     name="timeToElapse" 
@@ -68,6 +152,7 @@
                     hover:border-gray-200 
                     focus:border-gray-300" 
                     required
+                    placeholder="100"
                     type="number" 
                     min="0"
                     name="reportedCases" 
@@ -86,6 +171,7 @@
                     hover:border-gray-200 
                     focus:border-gray-300"
                     required 
+                    placeholder="500"
                     type="number" 
                     min="0"
                     name="totalHospitalBeds" 
@@ -103,6 +189,7 @@
                     hover:border-gray-200 
                     focus:border-gray-300" 
                     required
+                    aria-placeholder="days"
                     type="text" 
                     name="periodType" 
                     id="periodType"
@@ -116,7 +203,7 @@
 
             </label>
             <label for="" class="w-full md:w-5/12 invisible overflow-hidden"><span class="w-full"></span></label>
-            <button class="w-full md:w-2/3 px-8 py-4 my-2 
+            <button class="w-full md:w-2/3 px-8 py-4 my-4 
             border-green-800 rounded-md 
             outline-none bg-green-500 border-2 
             text-sm text-gray-800 
